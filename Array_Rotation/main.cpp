@@ -3,29 +3,47 @@
 using namespace std;
 
 
-void leftRotatebyOne(int arr[], int n)
+int gcd(int a, int b)
 {
-    int temp = arr[0], i;
-    for (i = 0; i < n - 1; i++)
-        arr[i] = arr[i + 1];
+    if (b == 0)
+        return a;
 
-    arr[i] = temp;
+    else
+        return gcd(b, a % b);
 }
 
 
 void leftRotate(int arr[], int d, int n)
 {
-    for (int i = 0; i < d; i++)
-        leftRotatebyOne(arr, n);
+
+    d = d % n;
+    int g_c_d = gcd(d, n);
+    for (int i = 0; i < g_c_d; i++) {
+
+        int temp = arr[i];
+        int j = i;
+
+        while (1) {
+            int k = j + d;
+            if (k >= n)
+                k = k - n;
+
+            if (k == i)
+                break;
+
+            arr[j] = arr[k];
+            j = k;
+        }
+        arr[j] = temp;
+    }
 }
 
 
-void printArray(int arr[], int n)
+void printArray(int arr[], int size)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
 }
-
 
 int main()
 {
