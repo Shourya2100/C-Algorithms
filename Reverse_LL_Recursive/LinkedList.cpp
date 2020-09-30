@@ -1,6 +1,49 @@
-#include <iostrea>
+#include <iostream>
 using namespace std;
 #include "Node.cpp"
+#include<bits/stdc++.h>
+
+Node* reverseLL_3(Node *head) {
+	if(head == NULL || head -> next == NULL) {
+		return head;
+	}
+
+	Node *smallAns = reverseLL_3(head -> next);
+
+	Node *tail = head -> next;
+	tail -> next = head;
+	head -> next = NULL;
+	return smallAns;
+}
+
+class Pair {
+	public :
+		
+			Node *head;
+			Node *tail;
+};
+
+Pair reverseLL_2(Node *head) {
+	if(head == NULL || head -> next == NULL) {
+		Pair ans;
+		ans.head = head;
+		ans.tail = head;
+		return ans;
+	}
+
+	Pair smallAns = reverseLL_2(head -> next);
+
+	smallAns.tail -> next = head;
+	head -> next = NULL;
+	Pair ans;
+	ans.head = smallAns.head;
+	ans.tail = head;
+	return ans;
+}
+
+Node* reverseLL_Better(Node *head) {
+	return reverseLL_2(head).head;
+}
 
 Node* reverseLL(Node *head) {
 	if(head == NULL || head -> next == NULL) {
@@ -53,7 +96,7 @@ void print(Node *head) {
 int main() {
 
 	Node *head = takeInput_Better();
-	head = reverseLL(head);
+	head = reverseLL_3(head);
 	print(head);
 
 
