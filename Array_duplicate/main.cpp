@@ -1,77 +1,31 @@
 #include <iostream>
-
 using namespace std;
 
 
-
-
-int DuplicateNumber(int arr[], int size){
-
-    int fre[size],count = 0,ans;
-
-
-
-for(int i = 0;i<size;i++)
+void printRepeating( int arr[], int n)
 {
-count = 1;
-for(int j = i+1;j<size;j++)
-{
-   if(arr[i]==arr[j])
-   {
-       count++;
-       fre[j]=0;
-   }
-}
 
-if(fre[i]!=0)
-{
-    fre[i] = count;
-}
+    for (int i = 0; i < n; i++)
+    {
+        int index = arr[i] % n;
+        arr[index] += n;
+    }
 
 
-}
-
-
-for(int i=0;i<size;i++)
-{
-    if(fre[i]!=0){
-
-
-if(fre[i]==2){
-        ans=arr[i];
-
-}
-
-
+    for (int i = 0; i < n; i++)
+    {
+        if ((arr[i]/n) > 1)
+            cout << i << " ";
     }
 }
-
-    return ans;
-
-}
-
-
 
 
 int main()
 {
+    int arr[] = {1, 6, 3, 1, 3, 6, 6};
+    int arr_size = sizeof(arr)/sizeof(arr[0]);
 
-	int t;
-	cin >> t;
-
-	while (t--)
-	{
-		int size;
-		cin >> size;
-		int *input = new int[size];
-
-		for (int i = 0; i < size; i++)
-		{
-			cin >> input[i];
-		}
-
-		cout << DuplicateNumber(input, size) << endl;
-	}
-
-	return 0;
+    cout << "The repeating elements are: \n";
+    printRepeating( arr, arr_size);
+    return 0;
 }
